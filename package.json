@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "typescript": "^3.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.1",
+    "multiscript": "^0.1.8",
+    "nodemon": "^2.0.4",
+    "ts-node-dev": "^1.0.0-pre.44"
+  },
+  "scripts": {
+    "dev": "ts-node-dev src",
+    "start": "tsc && node dist"
+  }
+}
