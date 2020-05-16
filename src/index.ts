@@ -10,7 +10,8 @@ import messageHandler from './handlers/message'
 const client = new Client()
 
 const props: Props = {
-  client
+  client,
+  queues: {},
 }
 
 client.on('ready', readyHandler(props))
