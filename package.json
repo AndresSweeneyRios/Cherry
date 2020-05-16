@@ -1,4 +1,5 @@
 {
+  "main": "dist/index.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.2.0",
@@ -12,7 +13,7 @@
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {
-    "dev": "ts-node-dev src",
+    "dev": "cd src && ts-node-dev .",
     "start": "tsc && node dist"
   }
 }

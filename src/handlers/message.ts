@@ -27,7 +27,7 @@ const messageHandler = (props: Props) => ( message: Message ): Promise<void> => 
     return send({ embed })
   }
 
-  const quickEmbed = ( title?: string, description?: string ): Promise<Message> => {
+  const quickEmbed = ( title?: string, description?: string, color?: string ): Promise<Message> => {
     return embed({
       title,
       description,

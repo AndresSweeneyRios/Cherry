@@ -1,6 +1,6 @@
 import { Client } from 'discord.js'
 
-import { Props } from '@/@interfaces'
+import { Props } from './@interfaces'
 
 import config from './config'
 

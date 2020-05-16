@@ -1,6 +1,7 @@
 import { Command, MessageProps, Track } from '../../@interfaces'
 
 import ytdl from '../../ytdl'
+import { red } from '../../colors'
 
 const play: Command = {
   regex: /^play(\s|$)/,
@@ -11,12 +12,12 @@ const play: Command = {
     const channel = props.member.voice.channel
 
     if (!channel) {
-      await props.quickEmbed('You must join a voice channel first.')
+      await props.quickEmbed(null, 'You must join a voice channel first.', red)
       return
     }
 
     if (!url || !/^https?:\/\/.+/.test(url)) {
-      await props.quickEmbed('Please provide a valid URL.')
+      await props.quickEmbed(null, 'Please provide a valid URL.', red)
       return 
     }
 
