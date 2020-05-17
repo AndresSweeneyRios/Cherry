@@ -5,7 +5,7 @@ const skip: Command = {
 
   callback ( props: MessageProps ) {
     if (props.member.voice.channel && props.member.voice.channel.id === props.queue.channel.id) {
-      props.playNext()
+      props.music.playNext()
     }
   }
 }

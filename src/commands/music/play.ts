@@ -23,6 +23,9 @@ const play: Command = {
 
     const connection = await channel.join()
 
+    connection.on("error", console.error)
+    connection.on("debug", console.log)
+
     const queue = props.queue
 
     queue.connection = connection
@@ -33,19 +36,34 @@ const play: Command = {
       queue.channel = null
     })
 
-    const result: string = await ytdl(['-J', '-q', '-s', '-f', 'bestaudio', url])
+    if (/\.(mp3|ogg|wav|aiff|m4a)$/.test(url)) {
+      const track: Track = {
+        title: /[^\/]+$/.exec(url)[0],
+        rawDuration: 0,
+        description: '',
+        author: props.author,
+        url: url,
+        thumbnail: null,
+      }
+  
+      await props.music.addTrack(track)
+      return
+    }
 
-    // console.log(JSON.parse(result))
+    const result: string = await ytdl(['-J', '-q', '-s', '-f', 'bestaudio', url])
 
     const {
       title,
-      duration,
+      description,
+      duration: rawDuration,
       thumbnails,
       formats,
     }: {
-      title: string,
+      title: string
 
-      duration: number,
+      description: string
+
+      duration: number
 
       thumbnails: [{
         url: string
@@ -61,14 +79,18 @@ const play: Command = {
 
     const track: Track = {
       title,
-      duration,
+      rawDuration,
+      description,
+      author: props.author,
       url: formats.find(({ format }) => /audio only/.test(format)).url,
       thumbnail: thumbnails && thumbnails.reverse()[0].url,
     }
 
-    props.send(track.thumbnail)
+    console.log({
+      url: track.url
+    })
 
-    props.addTrack(track)
+    await props.music.addTrack(track)
   }
 }
 
