@@ -7,7 +7,7 @@ const play: Command = {
   regex: /^play(\s|$)/,
 
   async callback ( props: MessageProps ): Promise<void> {
-    const [ url ] = props.args
+    const [ url, urlType ] = props.args
 
     const channel = props.member.voice.channel
 
@@ -16,7 +16,7 @@ const play: Command = {
       return
     }
 
-    if (!url || !/^https?:\/\/.+/.test(url)) {
+    if (!url || !/^https?:\/\/.+/.test(url) && urlType !== 'file') {
       await props.quickEmbed(null, 'Please provide a valid URL.', red)
       return 
     }
@@ -36,13 +36,13 @@ const play: Command = {
       queue.channel = null
     })
 
-    if (/\.(mp3|ogg|wav|aiff|m4a)$/.test(url)) {
+    if (/\.(mp3|ogg|wav|aiff|m4a)$/.test(url) || /raw|file/.test(urlType)) {
       const track: Track = {
-        title: /[^\/]+$/.exec(url)[0],
+        title: /[^\/]+((?=\#|\?)|$)/.exec(url)[0].replace(/(\?|\#).+/, ''),
         rawDuration: 0,
         description: '',
         author: props.author,
-        url: url,
+        url,
         thumbnail: null,
       }
   
@@ -77,18 +77,16 @@ const play: Command = {
       }]
     } = JSON.parse(result)
 
+    console.log(formats.find(({ format }) => /audio only/.test(format)))
+
     const track: Track = {
       title,
       rawDuration,
       description,
       author: props.author,
-      url: formats.find(({ format }) => /audio only/.test(format)).url,
+      url: /youtube.com|youtu.be/.test(url) ? url : formats.find(({ format }) => /audio only/.test(format)).url,
       thumbnail: thumbnails && thumbnails.reverse()[0].url,
     }
-
-    console.log({
-      url: track.url
-    })
 
     await props.music.addTrack(track)
   }

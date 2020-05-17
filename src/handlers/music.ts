@@ -2,8 +2,10 @@ import { MessageEmbed, Message, StreamDispatcher } from "discord.js"
 import { Track, Music } from "../@interfaces"
 import { Queue } from "src/@interfaces/Queue"
 
+import ytdlCore from 'ytdl-core-discord'
+
 export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }): Music => {
-  const playNext = (): void => {
+  const playNext = async (): Promise<void> => {
     if (queue.tracks.length === 0 && queue.connection) {
       queue.connection.disconnect()
 
@@ -18,7 +20,18 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
 
       if (queue.dispatcher) queue.dispatcher.end()
 
-      const dispatcher: StreamDispatcher = queue.connection.play(track.url)
+      const isYoutube = /youtube.com|youtu.be/.test(track.url)
+
+      /* 
+        ytdl-core fixes a bug with youtube audio streams
+        https://github.com/discordjs/discord.js/issues/3362
+      */
+     
+      const source = isYoutube ? await ytdlCore(track.url) : track.url
+      const bitrate = 128
+      const type = isYoutube ? 'opus' : null
+
+      const dispatcher: StreamDispatcher = queue.connection.play(source, { bitrate, type })
 
       Object.assign(queue, {
         dispatcher,
@@ -28,7 +41,6 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
       // queue.dispatcher.on("error", console.error)
       // queue.dispatcher.on("close", console.log)
       // queue.dispatcher.on("debug", console.log)
-      // queue.dispatcher.on("speaking", console.log)
     }
   }
 
@@ -50,7 +62,7 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
     if (!queue.dispatcher) {
       playNext()
 
-      return await embed({
+      return embed({
         title: `Now playing`,
         description: `[${track.title}](${track.url})`,
         fields: [
@@ -64,7 +76,7 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
         },
       } as MessageEmbed)
     } else {
-      return await embed({
+      return embed({
         title: `Added to queue`,
         description: `[${track.title}](${track.url})`,
         fields: [
