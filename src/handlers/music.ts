@@ -26,7 +26,7 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
         ytdl-core fixes a bug with youtube audio streams
         https://github.com/discordjs/discord.js/issues/3362
       */
-     
+
       const source = isYoutube ? await ytdlCore(track.url) : track.url
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
@@ -37,10 +37,6 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
         dispatcher,
         currentlyPlaying: track,
       })
-
-      // queue.dispatcher.on("error", console.error)
-      // queue.dispatcher.on("close", console.log)
-      // queue.dispatcher.on("debug", console.log)
     }
   }
 

@@ -4,7 +4,7 @@ import ytdl from '../../ytdl'
 import { red } from '../../colors'
 
 const play: Command = {
-  regex: /^play(\s|$)/,
+  regex: /^p|play(\s|$)/,
 
   async callback ( props: MessageProps ): Promise<void> {
     const [ url, urlType ] = props.args
