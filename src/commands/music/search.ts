@@ -1,7 +1,8 @@
 import { Command, MessageProps, Track } from '../../@interfaces'
+import { MessageEmbed } from 'discord.js'
 
 const search: Command = {
-  regex: /^search\s.+|^(p|play)\s(?!https?:\/\/.+)/,
+  regex: /^search\s.+|^(p|play)\s(?=.+)(?!https?:\/\/.+)/,
   
   async callback ( props: MessageProps ) {
     const query = props.args.join(' ')
@@ -71,7 +72,7 @@ const search: Command = {
 
     await props.quickEmbed(
       `Results for \`${query}\``, 
-      `\`\`\`\n${mappedTracks}\n\`\`\``
+      `\`\`\`\n${mappedTracks}\n\`\`\`\nType 1-10 to select a song.`,
     )
   }
 }
