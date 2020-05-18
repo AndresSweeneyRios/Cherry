@@ -73,7 +73,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
     const position = queue.tracks.push(track)
 
     if (!queue.currentlyPlaying) {
-      await playNext()
+      playNext().catch(console.error)
 
       return embed({
         title: `Now playing`,

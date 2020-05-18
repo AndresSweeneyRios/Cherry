@@ -1,10 +1,15 @@
 import { Command, MessageProps, Track } from '../../@interfaces'
-import { MessageEmbed } from 'discord.js'
+
+import { arrayFromPTString, durationFromPTStringArray, secondsFromPTStringArray } from '../../utils/duration'
 
 const search: Command = {
   regex: /^search\s.+|^(p|play)\s(?=.+)(?!https?:\/\/.+)/,
   
   async callback ( props: MessageProps ) {
+    const connection = await props.music.connect()
+
+    if (!connection) return
+
     const query = props.args.join(' ')
 
     const search = await props.youtube.search.list({
@@ -25,36 +30,20 @@ const search: Command = {
 
     const tracks: Track[] = items.map(
       ({ id, snippet, contentDetails }) => {
-        const ptDuration = contentDetails.duration.replace('PT', '')
+        const parsedPtString = arrayFromPTString(contentDetails.duration)
+        const duration = durationFromPTStringArray(parsedPtString)
+        const rawDuration = secondsFromPTStringArray(parsedPtString)
 
-        const [days] = ptDuration.match(/([0-9]{1,2}(?=D))/) || [null]
-        const [hours] = ptDuration.match(/([0-9]{1,2}(?=H))/) || [days ? '0' : null]
-        const [minutes] = ptDuration.match(/([0-9]{1,2}(?=M))/) || ['0']
-        const [seconds] = ptDuration.match(/([0-9]{1,2}(?=S))/) || ['0']
-        
-        const parsedPtDuration = [seconds, minutes, hours, days]
-          .filter(value => value !== null)
+        console.log(snippet.thumbnails)
 
-        const duration = parsedPtDuration
-          .reverse()
-          .map(string => string.padStart(2, '0'))
-          .join(':')
-
-        const rawDuration = parsedPtDuration
-          .map(Number)
-          .reduce((acc, number, index) => {
-            const multipliers = [1, 60, 60 * 60, 60 * 60 * 24] /* second, minute, hour, day */
-            acc += number * multipliers[index]
-
-            return acc 
-          }, 0)
+        const { high, maxres } = snippet.thumbnails
 
         return {
           title: snippet.title,
           description: snippet.description,
           duration,
           rawDuration,
-          thumbnail: snippet.thumbnails.high.url,
+          thumbnail: (maxres || high).url,
           author: props.author,
           url: `https://www.youtube.com/watch?v=${id}`,
         }

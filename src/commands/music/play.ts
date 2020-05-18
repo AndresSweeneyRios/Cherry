@@ -3,6 +3,8 @@ import { Command, MessageProps, Track } from '../../@interfaces'
 import ytdl from '../../ytdl'
 // import { red } from '../../colors'
 
+import { durationFromSeconds } from '../../utils/duration'
+
 const play: Command = {
   regex: /^(p|play)\s(https?:\/\/.+)/,
 
@@ -30,6 +32,7 @@ const play: Command = {
       }
   
       await props.music.addTrack(track)
+      
       return
     }
 
@@ -64,15 +67,7 @@ const play: Command = {
 
     const source = isYoutube ? url : formats.find(({ format }) => /audio only/.test(format)).url
 
-    const days = Math.floor(rawDuration / 60 / 60 / 24)
-    const hours = Math.floor(rawDuration / 60 / 60 - (days * 24))
-    const minutes = Math.floor(rawDuration / 60 - (days * 60 * 24) - (hours * 60))
-    const seconds = Math.floor(rawDuration - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60))
-    
-    const duration = [days || null, hours || days ? 0 : null, minutes, seconds]
-      .filter(time => time !== null)
-      .map(time => String(time).padStart(2, '0'))
-      .join(':')
+    const duration = durationFromSeconds(rawDuration)
 
     const track: Track = {
       title,
