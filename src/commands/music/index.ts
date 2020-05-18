@@ -6,6 +6,7 @@ import selectOneToTen from './1-10'
 import pause from './pause'
 import resume from './resume'
 import nowplaying from './nowplaying'
+import leave from './leave'
 
 const music = [
   search,
@@ -16,6 +17,7 @@ const music = [
   pause,
   resume,
   nowplaying,
+  leave,
 ]
 
 export default music
