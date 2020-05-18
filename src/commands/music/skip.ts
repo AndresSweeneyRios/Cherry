@@ -8,7 +8,8 @@ const skip: Command = {
 
     if ( currentlyPlaying ) {
       await props.quickEmbed('Skipping track', props.queue.currentlyPlaying.title)
-      await props.music.playNext()
+      // await props.music.playNext()
+      props.queue.dispatcher.emit("finish")
     } else {
       await props.quickEmbed(null, 'Nothing playing.')
     }

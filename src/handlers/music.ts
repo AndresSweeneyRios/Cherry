@@ -33,11 +33,11 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
 
   const playNext = async (): Promise<void> => {
     if (queue.tracks.length === 0 && queue.connection) {
-      queue.connection.disconnect()
+      // queue.connection.disconnect()
 
       Object.assign(queue, { 
-        connection: null, 
-        channel: null, 
+        // connection: null, 
+        // channel: null, 
         dispatcher: null,
         currentlyPlaying: null,
       })
@@ -65,13 +65,14 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
       })
 
       dispatcher.on('error', console.error)
+      dispatcher.on("finish", playNext)
     }
   }
 
   const addTrack = async (track: Track): Promise<Message> => {
     const position = queue.tracks.push(track)
 
-    if (!queue.dispatcher) {
+    if (!queue.currentlyPlaying) {
       await playNext()
 
       return embed({
