@@ -1,11 +1,16 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const skip: Command = {
-  regex: /^s|skip(\s|$)/,
+  regex: /^(s|skip)(\s|$)/,
 
-  callback ( props: MessageProps ) {
-    if (props.member.voice.channel && props.member.voice.channel.id === props.queue.channel.id) {
-      props.music.playNext()
+  async callback ( props: MessageProps ) {
+    const { currentlyPlaying } = props.queue
+
+    if ( currentlyPlaying ) {
+      await props.quickEmbed('Skipping track', props.queue.currentlyPlaying.title)
+      await props.music.playNext()
+    } else {
+      await props.quickEmbed(null, 'Nothing playing.')
     }
   }
 }

@@ -1,7 +1,8 @@
 import { Track } from "./Track";
-import { Message } from "discord.js";
+import { Message, VoiceConnection } from "discord.js";
 
 export interface Music {
-  playNext (): void
+  connect (): Promise<VoiceConnection>
+  playNext (): Promise<void>
   addTrack (track: Track): Promise<Message>
 }

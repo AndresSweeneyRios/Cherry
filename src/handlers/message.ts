@@ -3,11 +3,11 @@ import { MessageEmbed, Message } from 'discord.js'
 import { testCommand } from '../commands'
 import { accent } from '../colors'
 
-import { Props, MessageProps, Track } from '../@interfaces'
+import { Props, MessageProps, Track, Search } from '../@interfaces'
 
 import music from './music'
 
-const messageHandler = (props: Props) => ( message: Message ): Promise<void> => {
+const messageHandler = (props: Props) => (message: Message): Promise<void> => {
   if (!message.guild || message.author.bot) return
 
   const send = (content: string | { embed: MessageEmbed }): Promise<Message> => {
@@ -35,7 +35,11 @@ const messageHandler = (props: Props) => ( message: Message ): Promise<void> => 
     } as MessageEmbed)
   }
 
-  props.queues[message.guild.id] = props.queues[message.guild.id] || {
+  const { guild, author } = message
+
+  const { queues, searches } = props
+
+  queues[guild.id] = queues[guild.id] || {
     connection: null,
     channel: null,
     dispatcher: null,
@@ -43,18 +47,32 @@ const messageHandler = (props: Props) => ( message: Message ): Promise<void> => 
     tracks: [],
   }
 
-  const queue = props.queues[message.guild.id]
+  const queue = props.queues[guild.id]
+
+  if (!searches[guild.id]) searches[guild.id] = {}
+
+  if (!searches[guild.id][author.id]) searches[guild.id][author.id] = {
+    tracks: [],
+    date: 0,
+  }
+
+  const search = searches[guild.id][author.id]
+
+  const partialMessageProps = Object.assign(message, {
+    send,
+    embed,
+    quickEmbed,
+    args: [],
+    queue,
+    search,
+    youtube: props.youtube,
+  } as MessageProps)
 
   const messageProps: MessageProps = Object.assign(
-    message, 
+    partialMessageProps,
     {
-      send,
-      embed,
-      quickEmbed,
-      args: [],
-      queue,
-      music: music({ embed, queue }),
-    }
+      music: music(partialMessageProps),
+    },
   )
 
   testCommand(messageProps).catch(console.error)

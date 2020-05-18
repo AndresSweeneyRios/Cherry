@@ -5,6 +5,7 @@
     "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.2.0",
     "ffmpeg-static": "^4.2.1",
+    "googleapis": "^51.0.0",
     "typescript": "^3.9.2",
     "ytdl-core-discord": "^1.2.0"
   },

@@ -1,10 +1,36 @@
-import { MessageEmbed, Message, StreamDispatcher } from "discord.js"
-import { Track, Music } from "../@interfaces"
-import { Queue } from "src/@interfaces/Queue"
+import { MessageEmbed, Message, StreamDispatcher, VoiceConnection } from "discord.js"
+import { Track, Music, MessageProps, Queue } from "../@interfaces"
+
+import { red } from '../colors'
 
 import ytdlCore from 'ytdl-core-discord'
 
-export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }): Music => {
+export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
+  const connect = async (): Promise<VoiceConnection> => {
+    const { channel } = member.voice
+
+    if (!channel) {
+      await quickEmbed(null, 'You must join a voice channel first.', red)
+      return
+    }
+
+    if (queue.channel && channel.id === queue.channel.id && queue.connection) return queue.connection
+
+    const connection = await channel.join()
+
+    connection.on("error", console.error)
+
+    queue.connection = connection
+    queue.channel = channel
+
+    connection.on("disconnect", () => {
+      queue.connection = null
+      queue.channel = null
+    })
+
+    return connection
+  }
+
   const playNext = async (): Promise<void> => {
     if (queue.tracks.length === 0 && queue.connection) {
       queue.connection.disconnect()
@@ -37,26 +63,16 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
         dispatcher,
         currentlyPlaying: track,
       })
+
+      dispatcher.on('error', console.error)
     }
   }
 
   const addTrack = async (track: Track): Promise<Message> => {
-    const days = Math.floor(track.rawDuration / 60 / 60 / 24)
-    const hours = Math.floor(track.rawDuration / 60 / 60 - (days * 24))
-    const minutes = Math.floor(track.rawDuration / 60 - (days * 60 * 24) - (hours * 60))
-    const seconds = Math.floor(track.rawDuration - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60))
-    
-    const duration = [days || null, hours || days ? 0 : null, minutes, seconds]
-      .filter(time => time !== null)
-      .map(time => String(time).padStart(2, '0'))
-      .join(':')
-
-    track.duration = duration
-
     const position = queue.tracks.push(track)
 
     if (!queue.dispatcher) {
-      playNext()
+      await playNext()
 
       return embed({
         title: `Now playing`,
@@ -94,6 +110,7 @@ export default ({ queue, embed }: { queue: Queue, embed(any): Promise<Message> }
   }
 
   return {
+    connect,
     addTrack,
     playNext,
   }
