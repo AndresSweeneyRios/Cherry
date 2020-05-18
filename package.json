@@ -11,12 +11,13 @@
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
+    "cross-env": "^7.0.2",
     "multiscript": "^0.1.8",
     "nodemon": "^2.0.4",
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {
-    "dev": "cd src && ts-node-dev .",
-    "start": "tsc && node dist"
+    "dev": "cross-env NODE_ENV=development ts-node-dev src",
+    "start": "tsc && cross-env NODE_ENV=production node dist"
   }
 }

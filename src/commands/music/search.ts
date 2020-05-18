@@ -34,8 +34,6 @@ const search: Command = {
         const duration = durationFromPTStringArray(parsedPtString)
         const rawDuration = secondsFromPTStringArray(parsedPtString)
 
-        console.log(snippet.thumbnails)
-
         const { high, maxres } = snippet.thumbnails
 
         return {

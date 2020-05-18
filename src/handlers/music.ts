@@ -81,7 +81,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
         fields: [
           {
             name: 'Duration',
-            value: `${track.duration}`,
+            value: `00:00 / ${track.duration}`,
           }
         ],
         image: {

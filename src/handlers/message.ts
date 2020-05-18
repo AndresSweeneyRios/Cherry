@@ -7,8 +7,17 @@ import { Props, MessageProps, Track, Search } from '../@interfaces'
 
 import music from './music'
 
+const devGuildId = "619934138761478164"
+
 const messageHandler = (props: Props) => (message: Message): Promise<void> => {
-  if (!message.guild || message.author.bot) return
+  const { guild, author } = message
+
+  const { NODE_ENV } = process.env
+
+  if (!guild || author.bot) return
+
+  if (guild.id === devGuildId && NODE_ENV === 'production') return
+  if (guild.id !== devGuildId && NODE_ENV === 'development') return
 
   const send = (content: string | { embed: MessageEmbed }): Promise<Message> => {
     return message.channel.send(content)
@@ -34,8 +43,6 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
       description,
     } as MessageEmbed)
   }
-
-  const { guild, author } = message
 
   const { queues, searches } = props
 
