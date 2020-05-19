@@ -1,7 +1,6 @@
 import { Command, MessageProps, Track } from '../../@interfaces'
 
-import ytdl from '../../ytdl'
-// import { red } from '../../colors'
+import ytdl from '../../utils/ytdl'
 
 import { durationFromSeconds } from '../../utils/duration'
 

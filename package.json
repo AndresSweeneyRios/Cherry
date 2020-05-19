@@ -6,15 +6,12 @@
     "axios": "^0.19.2",
     "discord.js": "^12.2.0",
     "ffmpeg-static": "^4.2.1",
-    "googleapis": "^51.0.0",
     "typescript": "^3.9.2",
     "ytdl-core-discord": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
     "cross-env": "^7.0.2",
-    "multiscript": "^0.1.8",
-    "nodemon": "^2.0.4",
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {

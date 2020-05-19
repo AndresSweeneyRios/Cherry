@@ -1,7 +1,7 @@
 import { MessageEmbed, Message } from 'discord.js'
 
 import { testCommand } from '../commands'
-import { accent } from '../colors'
+import { accent } from '../utils/colors'
 
 import { Props, MessageProps, Track, Search } from '../@interfaces'
 
@@ -72,7 +72,6 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
     args: [],
     queue,
     search,
-    youtube: props.youtube,
   } as MessageProps)
 
   const messageProps: MessageProps = Object.assign(

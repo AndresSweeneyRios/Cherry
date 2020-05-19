@@ -1,7 +1,7 @@
 import { MessageEmbed, Message, StreamDispatcher, VoiceConnection } from "discord.js"
 import { Track, Music, MessageProps, Queue } from "../@interfaces"
 
-import { red } from '../colors'
+import { red } from '../utils/colors'
 
 import ytdlCore from 'ytdl-core-discord'
 
@@ -56,7 +56,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
       const source = isYoutube ? await ytdlCore(track.url) : track.url
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
-      const highWaterMark = 1028*10
+      const highWaterMark = 4096
 
       const dispatcher: StreamDispatcher = queue.connection.play(source, { bitrate, type, highWaterMark })
 
