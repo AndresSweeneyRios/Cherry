@@ -11,8 +11,8 @@ const ping: Command = {
       commands
         .filter(({ usage, description }) => usage && description)
         .map(
-          ({ usage, description }) => `**${usage}** - ${description}`
-        ).join('\n\n')
+          ({ usage, description }) => `\`${usage}\` - ${description}`
+        ).join('\n')
     )
   }
 }

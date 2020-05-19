@@ -1,9 +1,9 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const remove: Command = {
-  regex: /^(remove)\s[0-9]+(\s|$)/i,
+  regex: /^(remove|r)\s[0-9]+(\s|$)/i,
 
-  usage: 'remove <position>',
+  usage: 'remove | r <position>',
   description: 'Removes a track at the specified position from queue.',
 
   async callback ( props: MessageProps ) {
