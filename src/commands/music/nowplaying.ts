@@ -6,6 +6,9 @@ import { escape } from '../../utils/markdown'
 const nowplaying: Command = {
   regex: /^(nowplaying|np|playing|status)$/i,
 
+  usage: 'nowplaying | np | playing | status',
+  description: 'Displays current track.',
+
   async callback ( props: MessageProps ) {
     const { currentlyPlaying, dispatcher } = props.queue
 

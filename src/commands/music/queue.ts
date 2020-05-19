@@ -6,6 +6,9 @@ import { escape } from '../../utils/markdown'
 const search: Command = {
   regex: /^(q|queue|list)(\s|$)/i,
 
+  usage: 'queue | q | list',
+  description: 'Displays server queue.',
+
   callback ( props: MessageProps ) {
     const { currentlyPlaying, tracks } = props.queue
 

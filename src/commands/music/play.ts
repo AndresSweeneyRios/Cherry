@@ -8,6 +8,9 @@ import { durationFromSeconds } from '../../utils/duration'
 const play: Command = {
   regex: /^(p|play)\s(https?:\/\/.+)/i,
 
+  usage: 'play | p <url>',
+  description: 'Adds a track to queue from a URL. ([Supported sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html))',
+
   async callback ( props: MessageProps ): Promise<void> {
     const [ url, urlType ] = props.args
 

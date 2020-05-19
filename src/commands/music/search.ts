@@ -8,6 +8,9 @@ import axios from 'axios'
 
 const search: Command = {
   regex: /^search\s.+|^(p|play)\s(?=.+)(?!https?:\/\/.+)/i,
+
+  usage: 'search | p | play <query>',
+  description: 'Searches for a song and returns a list of results.',
   
   async callback ( props: MessageProps ) {
     const connection = await props.music.connect()

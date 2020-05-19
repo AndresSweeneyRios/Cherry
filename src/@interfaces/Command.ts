@@ -1,7 +1,7 @@
 import { MessageProps } from './MessageProps'
 
 export interface Command {
-  name?: string
+  usage?: string
   description?: string
   regex: RegExp
   noPrefix?: boolean

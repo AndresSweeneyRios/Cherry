@@ -1,11 +1,11 @@
 import config from '../config'
 
-import { MessageProps } from '../@interfaces'
+import { MessageProps, Command } from '../@interfaces'
 
 import utils from './utils'
 import music from './music'
 
-export const commands = [
+export const commands: Command[] = [
   ...utils,
   ...music,
 ]
