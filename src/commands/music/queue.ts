@@ -1,8 +1,10 @@
 import { Command, MessageProps } from '../../@interfaces'
 import { MessageEmbed } from 'discord.js'
 
+import { escape } from '../../utils/markdown'
+
 const search: Command = {
-  regex: /^(q|queue|list)(\s|$)/,
+  regex: /^(q|queue|list)(\s|$)/i,
 
   callback ( props: MessageProps ) {
     const { currentlyPlaying, tracks } = props.queue
@@ -14,14 +16,14 @@ const search: Command = {
 
       fields.push({
         name: "Now playing",
-        value: `[${currentlyPlaying.title}](${currentlyPlaying.url}) - ${currentlyPlaying.duration}\n Requested by <@${currentlyPlaying.author.id}>`
+        value: `[${escape(currentlyPlaying.title)}](${currentlyPlaying.url}) - ${currentlyPlaying.duration}\n Requested by <@${currentlyPlaying.author.id}>`
       })
 
       if (tracks.length > 0) fields.push({
         name: "Up next",
         value: tracks.map(
           ({ title, duration, url, author }, index) => (
-            `${index + 1}. [${title}](${url}) - ${duration}\n Requested by <@${author.id}>`
+            `${index + 1}. [${escape(title)}](${url}) - ${duration}\n Requested by <@${author.id}>`
           )
         ).join('\n\n')
       })

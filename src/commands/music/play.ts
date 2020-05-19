@@ -6,7 +6,7 @@ import ytdl from '../../ytdl'
 import { durationFromSeconds } from '../../utils/duration'
 
 const play: Command = {
-  regex: /^(p|play)\s(https?:\/\/.+)/,
+  regex: /^(p|play)\s(https?:\/\/.+)/i,
 
   async callback ( props: MessageProps ): Promise<void> {
     const [ url, urlType ] = props.args

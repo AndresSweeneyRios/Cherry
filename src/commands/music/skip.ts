@@ -1,7 +1,7 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const skip: Command = {
-  regex: /^(s|skip)$/,
+  regex: /^(s|skip)$/i,
 
   async callback ( props: MessageProps ) {
     const { currentlyPlaying } = props.queue

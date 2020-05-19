@@ -1,7 +1,7 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const pause: Command = {
-  regex: /^(pause|stop)$/,
+  regex: /^(pause|stop)$/i,
 
   async callback ( props: MessageProps ) {
     const { dispatcher } = props.queue

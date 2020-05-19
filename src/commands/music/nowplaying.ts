@@ -1,9 +1,10 @@
 import { Command, MessageProps } from '../../@interfaces'
 import { MessageEmbed } from 'discord.js'
 import { durationFromSeconds } from '../../utils/duration'
+import { escape } from '../../utils/markdown'
 
 const nowplaying: Command = {
-  regex: /^(nowplaying|np|playing)$/,
+  regex: /^(nowplaying|np|playing|status)$/i,
 
   async callback ( props: MessageProps ) {
     const { currentlyPlaying, dispatcher } = props.queue
@@ -13,7 +14,7 @@ const nowplaying: Command = {
     else{
       await props.embed({ 
         title: 'Now playing',
-        description: `[${currentlyPlaying.title}](${currentlyPlaying.url})`,
+        description: `[${escape(currentlyPlaying.title)}](${currentlyPlaying.url})`,
         fields: [
           {
             name: 'Duration',
@@ -24,7 +25,7 @@ const nowplaying: Command = {
             value: `<@${currentlyPlaying.author.id}>`
           },
         ],
-        image: {
+        thumbnail: {
           url: currentlyPlaying.thumbnail,
         },
       } as MessageEmbed)

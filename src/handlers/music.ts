@@ -85,7 +85,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
             value: `00:00 / ${track.duration}`,
           }
         ],
-        image: {
+        thumbnail: {
           url: track.thumbnail
         },
       } as MessageEmbed)
@@ -104,7 +104,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
           }
         ],
         
-        image: {
+        thumbnail: {
           url: track.thumbnail
         },
       } as MessageEmbed)

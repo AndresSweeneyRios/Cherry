@@ -1,7 +1,7 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const remove: Command = {
-  regex: /^(remove)\s[0-9]+(\s|$)/,
+  regex: /^(remove)\s[0-9]+(\s|$)/i,
 
   async callback ( props: MessageProps ) {
     const [position] = props.args

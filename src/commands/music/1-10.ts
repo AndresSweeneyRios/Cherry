@@ -1,7 +1,7 @@
 import { Command, MessageProps } from '../../@interfaces'
 
 const selectOneToTen: Command = {
-  regex: /^(10|[1-9])$/,
+  regex: /^(10|[1-9])$/i,
 
   noPrefix: true,
 
