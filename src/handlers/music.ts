@@ -56,7 +56,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
       const source = isYoutube ? await ytdlCore(track.url) : track.url
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
-      const highWaterMark = 1028*128
+      const highWaterMark = 1028*10
 
       const dispatcher: StreamDispatcher = queue.connection.play(source, { bitrate, type, highWaterMark })
 
