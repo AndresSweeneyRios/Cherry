@@ -7,7 +7,10 @@ const skip: Command = {
     const { currentlyPlaying } = props.queue
 
     if ( currentlyPlaying ) {
-      await props.quickEmbed('Skipping track', props.queue.currentlyPlaying.title)
+      await props.quickEmbed(
+        'Skipping track', 
+        `[${currentlyPlaying.title}](${currentlyPlaying.url}) - ${currentlyPlaying.duration}\n Requested by <@${currentlyPlaying.author.id}>`
+      )
       // await props.music.playNext()
       props.queue.dispatcher.emit("finish")
     } else {

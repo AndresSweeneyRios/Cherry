@@ -2,7 +2,7 @@ import { Command, MessageProps } from '../../@interfaces'
 import { MessageEmbed } from 'discord.js'
 
 const search: Command = {
-  regex: /^(q|queue)(\s|$)/,
+  regex: /^(q|queue|list)(\s|$)/,
 
   callback ( props: MessageProps ) {
     const { currentlyPlaying, tracks } = props.queue
@@ -14,23 +14,26 @@ const search: Command = {
 
       fields.push({
         name: "Now playing",
-        value: `${currentlyPlaying.title} - ${currentlyPlaying.duration}`
+        value: `[${currentlyPlaying.title}](${currentlyPlaying.url}) - ${currentlyPlaying.duration}\n Requested by <@${currentlyPlaying.author.id}>`
       })
 
       if (tracks.length > 0) fields.push({
         name: "Up next",
         value: tracks.map(
-          ({ title, duration }, index) => `${index + 1}. ${title} - ${duration}`
-        ).join('\n')
+          ({ title, duration, url, author }, index) => (
+            `${index + 1}. [${title}](${url}) - ${duration}\n Requested by <@${author.id}>`
+          )
+        ).join('\n\n')
       })
 
       props.embed({ 
         description: fields.map(
-          ({ name, value }) => `**${name}**\n\`\`\`\n${value}\n\`\`\``
-        ).join('\n'),
+          ({ name, value }) => `**${name}**\n${value}`
+        ).join('\n\n'),
         // image: {
         //   url: currentlyPlaying.thumbnail,
         // },
+        author: null,
       } as MessageEmbed)
     }
   }

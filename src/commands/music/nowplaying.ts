@@ -19,6 +19,10 @@ const nowplaying: Command = {
             name: 'Duration',
             value: `${durationFromSeconds(dispatcher.streamTime/1000)} / ${currentlyPlaying.duration}`,
           },
+          {
+            name: 'Requested by',
+            value: `<@${currentlyPlaying.author.id}>`
+          },
         ],
         image: {
           url: currentlyPlaying.thumbnail,

@@ -9,7 +9,7 @@ export const arrayFromPTString = (ptString: string): string[] => {
 
 export const secondsFromPTStringArray = (ptStringArray: string[]): number => {
   return ptStringArray
-    .map(Number)
+    .map(string => Number(string))
     .reduce((acc, number, index) => {
       const multipliers = [1, 60, 60 * 60, 60 * 60 * 24] /* second, minute, hour, day */
       acc += number * multipliers[index]
@@ -26,12 +26,12 @@ export const durationFromPTStringArray = (ptStringArray: string[]): string => {
 }
 
 export const durationFromSeconds = (totalSeconds: number): string => {
-  const days = Math.floor(totalSeconds / 60 / 60 / 24)
-  const hours = Math.floor(totalSeconds / 60 / 60 - (days * 24))
+  const days = Math.floor(totalSeconds / 60 / 60 / 24) || null
+  const hours = Math.floor(totalSeconds / 60 / 60 - (days * 24)) || (days ? 0 : null)
   const minutes = Math.floor(totalSeconds / 60 - (days * 60 * 24) - (hours * 60))
   const seconds = Math.floor(totalSeconds - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60))
   
-  const duration = [days || null, hours || days ? 0 : null, minutes, seconds]
+  const duration = [days, hours, minutes, seconds]
     .filter(time => time !== null)
     .map(time => String(time).padStart(2, '0'))
     .join(':')

@@ -7,6 +7,7 @@ import pause from './pause'
 import resume from './resume'
 import nowplaying from './nowplaying'
 import leave from './leave'
+import remove from './remove'
 
 const music = [
   search,
@@ -18,6 +19,7 @@ const music = [
   resume,
   nowplaying,
   leave,
+  remove,
 ]
 
 export default music
