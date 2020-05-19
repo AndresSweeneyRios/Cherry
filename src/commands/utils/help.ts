@@ -3,7 +3,7 @@ import { MessageProps, Command } from '../../@interfaces'
 import { commands } from '../'
 
 const ping: Command = {
-  regex: /^help|\?|ayuda$/,
+  regex: /^(help|ayuda)$/,
   
   async callback (props: MessageProps) {
     await props.quickEmbed(
