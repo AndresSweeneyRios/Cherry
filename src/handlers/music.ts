@@ -46,7 +46,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
 
       if (queue.dispatcher) queue.dispatcher.end()
 
-      const isYoutube = /youtube.com|youtu.be/.test(track.url)
+      const isYoutube = /youtube\.com|youtu\.be/.test(track.url)
 
       /* 
         ytdl-core fixes a bug with youtube audio streams

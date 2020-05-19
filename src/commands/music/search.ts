@@ -97,8 +97,6 @@ const search: Command = {
       ({ title, duration }, index) => `${index+1}. ${title} - ${duration}`
     ).join('\n\n')
 
-    console.log(mappedTracks)
-
     await props.quickEmbed(
       `Results for \`${query}\``, 
       `\`\`\`\n${mappedTracks}\n\`\`\`\nType 1-10 to select a song.`,
