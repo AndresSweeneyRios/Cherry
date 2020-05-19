@@ -1,6 +1,5 @@
 import path from 'path'
 import { execFile } from 'child_process'
-import os from 'os'
 
 export default ( args?: string[] ): Promise<string> => new Promise(
   ( resolve, reject ) => {

@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js'
 import { durationFromSeconds } from '../../utils/duration'
 
 const nowplaying: Command = {
-  regex: /^(nowplaying|np)$/,
+  regex: /^(nowplaying|np|playing)$/,
 
   async callback ( props: MessageProps ) {
     const { currentlyPlaying, dispatcher } = props.queue
