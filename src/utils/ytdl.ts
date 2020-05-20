@@ -6,7 +6,7 @@ export default ( args?: string[] ): Promise<string> => new Promise(
     execFile(
       path.join(
         __dirname, 
-        process.platform === 'win32' ? '../bin/youtube-dl.exe' : '../bin/youtube-dl'
+        process.platform === 'win32' ? '../../bin/youtube-dl.exe' : '../../bin/youtube-dl'
       ),
       args,
       (error, stdout, stderr) => {
