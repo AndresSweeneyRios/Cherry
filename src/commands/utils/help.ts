@@ -11,9 +11,7 @@ const ping: Command = {
   async callback (props: MessageProps) {
     const commandList = commands
       .filter(({ usage, description }) => usage && description)
-      .map(
-        ({ usage, description }) => `\`${usage}\` - ${description}`,
-      )
+      .map(({ usage, description }) => `\`${usage}\` - ${description}`)
       .join('\n')
 
     await props.quickEmbed(

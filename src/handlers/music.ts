@@ -66,10 +66,15 @@ export default ({
         https://github.com/discordjs/discord.js/issues/3362
       */
 
-      const source = isYoutube ? await ytdlCore(track.url) : track.url
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
-      const highWaterMark = 4096
+      const highWaterMark = 1028 * 64
+      const source = isYoutube ? await ytdlCore(track.url, {
+        highWaterMark,
+        requestOptions: {
+          maxRetries: 5,
+        },
+      }) : track.url
 
       const dispatcher: StreamDispatcher = queue.connection.play(source, {
         bitrate,
