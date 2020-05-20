@@ -33,11 +33,11 @@ yarn start
 ## scripts
 ```ts
 {
-  build // builds the project to /dist for production mode
-  start // starts the bot in production mode
-  dev // starts the bot in development mode
+  build         // builds the project to /dist for production mode
+  start         // starts the bot in production mode
+  dev           // starts the bot in development mode
   devProduction // starts the bot in production mode, and uses config.devServer
-  lint // lints and fixes
+  lint          // lints and fixes
 }
 ```
 
