@@ -50,7 +50,7 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
     return embed({
       title,
       description,
-      color,
+      color: color || accent,
     } as { color: number | string } as MessageEmbed)
   }
 
