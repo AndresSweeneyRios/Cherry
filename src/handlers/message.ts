@@ -7,7 +7,7 @@ import { Props, MessageProps, Track, Search } from '../@interfaces'
 
 import music from './music'
 
-const devGuildId = "619934138761478164"
+const devGuildId = process.env.GUILD_ID || "619934138761478164"
 
 const messageHandler = (props: Props) => (message: Message): Promise<void> => {
   const { guild, author } = message
