@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import {
-  MessageEmbed, Message, 
+  MessageEmbed, 
+  Message, 
 } from 'discord.js'
 
 import { testCommand } from '../commands'
@@ -15,7 +16,7 @@ import {
 
 import music from './music'
 
-const devGuildId = process.env.GUILD_ID || "619934138761478164"
+import config from '../config'
 
 const messageHandler = (props: Props) => (message: Message): Promise<void> => {
   const { guild, author } = message
@@ -24,8 +25,8 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
 
   if (!guild || author.bot) return
 
-  if (guild.id === devGuildId && NODE_ENV === 'production') return
-  if (guild.id !== devGuildId && NODE_ENV === 'development') return
+  if (guild.id === config.devServer && NODE_ENV === 'production') return
+  if (guild.id !== config.devServer && NODE_ENV === 'development') return
 
   const send = (content: string | { embed: MessageEmbed }): Promise<Message> => {
     return message.channel.send(content)

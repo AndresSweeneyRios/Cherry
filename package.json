@@ -1,4 +1,8 @@
 {
+  "name": "cherry",
+  "description": "A Discord music bot.",
+  "keywords": ["discord", "bot", "music", "typescript"],
+  "version": "3.1.4",
   "main": "dist/index.js",
   "license": "MIT",
   "dependencies": {
@@ -24,5 +28,29 @@
     "build": "tsc",
     "lint": "eslint src/** --fix",
     "precommit": "yarn run lint"
-  }
+  },
+  "bugs": { 
+    "url" : "https://github.com/Andr3wRiv3rs/Cherry/issues", 
+    "email" : "andrewarivers@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/Andr3wRiv3rs/Cherry/issues",
+    "type": "github"
+  },
+  "author": {
+    "name": "Andres Sweeney-Rios",
+    "email": "andrewarivers@gmail.com",
+    "url": "https://poisonapple.dev"
+  },
+  "contributors": [
+    {
+      "name": "Andres Sweeney-Rios",
+      "email": "andrewarivers@gmail.com",
+      "url": "https://poisonapple.dev"
+    },
+    {
+      "name": "Austin",
+      "url": "https://github.com/austinmccalley"
+    }
+  ]
 }
