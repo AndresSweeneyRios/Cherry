@@ -6,6 +6,7 @@ import config from './config'
 
 import readyHandler from './handlers/ready'
 import messageHandler from './handlers/message'
+import voiceStateHandler from './handlers/voiceState'
 
 const client = new Client()
 
@@ -16,6 +17,8 @@ const props: Props = {
 }
 
 client.on('ready', readyHandler(props))
+
+client.on('voiceStateUpdate', voiceStateHandler(props))
 
 client.on('message', messageHandler(props))
 
