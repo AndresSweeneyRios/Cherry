@@ -1,4 +1,4 @@
-import { User } from "discord.js";
+import { User } from "discord.js"
 
 export interface Track {
   title: string

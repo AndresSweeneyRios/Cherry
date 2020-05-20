@@ -1,4 +1,7 @@
-import { MessageProps, Command } from '../../@interfaces'
+import {
+  MessageProps, 
+  Command, 
+} from '../../@interfaces'
 
 import { commands } from '../'
 
@@ -11,10 +14,11 @@ const ping: Command = {
       commands
         .filter(({ usage, description }) => usage && description)
         .map(
-          ({ usage, description }) => `\`${usage}\` - ${description}`
-        ).join('\n')
+          ({ usage, description }) => `\`${usage}\` - ${description}`,
+        )
+        .join('\n'),
     )
-  }
+  },
 }
 
 export default ping

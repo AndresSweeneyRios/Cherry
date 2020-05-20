@@ -1,6 +1,13 @@
-import { Command, MessageProps, Track } from '../../@interfaces'
+import {
+  Command, 
+  MessageProps, 
+  Track, 
+} from '../../@interfaces'
 
-import { durationFromPTStringArray, secondsFromPTStringArray } from '../../utils/duration'
+import {
+  durationFromPTStringArray, 
+  secondsFromPTStringArray, 
+} from '../../utils/duration'
 
 import { escape } from '../../utils/markdown'
 
@@ -12,7 +19,7 @@ const search: Command = {
   usage: 'search | p | play <query>',
   description: 'Searches for a song and returns a list of results.',
   
-  async callback ( props: MessageProps ) {
+  async callback (props: MessageProps) {
     const connection = await props.music.connect()
 
     if (!connection) return
@@ -25,6 +32,7 @@ const search: Command = {
     
     if (items.length === 0) {
       await props.quickEmbed(null, 'No results.')
+      
       return
     }
 
@@ -32,13 +40,15 @@ const search: Command = {
       .filter(({ video: { duration } }) => duration.toLowerCase() !== 'playlist')
       .slice(0, 10)
       .map(
-        ({ video: { 
-          snippet: description, 
-          title, 
-          url, 
-          thumbnail_src: thumbnail, 
-          duration: durationString, 
-        }}) => {
+        ({
+          video: { 
+            snippet: description, 
+            title, 
+            url, 
+            thumbnail_src: thumbnail, 
+            duration: durationString, 
+          }, 
+        }) => {
           const parsedPtString = durationString.split(':').reverse()
           const duration = durationFromPTStringArray(parsedPtString)
           const rawDuration = secondsFromPTStringArray(parsedPtString)
@@ -52,23 +62,23 @@ const search: Command = {
             author: props.author,
             url,
           }
-        }
+        },
       )
 
     Object.assign(props.search, {
       tracks,
-      date: Date.now()
+      date: Date.now(),
     })
 
     const mappedTracks = tracks.map(
-      ({ title, duration, url }, index) => `${index+1}. [${title}](${url}) - ${duration}`
+      ({ title, duration, url }, index) => `${index + 1}. [${title}](${url}) - ${duration}`,
     ).join('\n\n')
 
     props.search.message = await props.quickEmbed(
       `Results for *${escape(query)}*`, 
       `${mappedTracks}\n\nType 1-10 to select a song.`,
     )
-  }
+  },
 }
 
 export default search

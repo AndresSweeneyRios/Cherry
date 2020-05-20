@@ -11,13 +11,18 @@
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "cross-env": "^7.0.2",
+    "eslint": "^7.0.0",
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev src",
     "start": "cross-env NODE_ENV=production node dist",
     "devProduction": "cross-env NODE_ENV=development node dist",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint src/** --fix",
+    "precommit": "yarn run lint"
   }
 }

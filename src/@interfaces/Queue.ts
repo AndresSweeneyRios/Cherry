@@ -1,4 +1,8 @@
-import { VoiceConnection, VoiceChannel, StreamDispatcher } from 'discord.js'
+import {
+  VoiceConnection, 
+  VoiceChannel, 
+  StreamDispatcher, 
+} from 'discord.js'
 
 import { Track } from './Track'
 

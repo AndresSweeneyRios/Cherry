@@ -1,11 +1,14 @@
-import { Command, MessageProps } from '../../@interfaces'
+import {
+  Command, 
+  MessageProps, 
+} from '../../@interfaces'
 
 const selectOneToTen: Command = {
   regex: /^(10|[1-9])$/i,
 
   noPrefix: true,
 
-  async callback ( props: MessageProps ) {
+  async callback (props: MessageProps) {
     if (!props.search.date || Date.now() - props.search.date > 30000) return
 
     const connection = await props.music.connect()
@@ -24,7 +27,7 @@ const selectOneToTen: Command = {
     })
 
     await props.music.addTrack(track)
-  }
+  },
 }
 
 export default selectOneToTen

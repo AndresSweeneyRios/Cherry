@@ -1,8 +1,11 @@
-import { Message, MessageEmbed } from 'discord.js'
+import {
+  Message, 
+  MessageEmbed, 
+} from 'discord.js'
 
-import { Queue } from './Queue';
-import { Music } from './Music';
-import { Search } from './Search';
+import { Queue } from './Queue'
+import { Music } from './Music'
+import { Search } from './Search'
 
 export interface MessageProps extends Message {
   send (content: string | { embed: MessageEmbed }): Promise<Message>

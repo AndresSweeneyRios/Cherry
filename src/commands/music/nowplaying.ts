@@ -1,4 +1,8 @@
-import { Command, MessageProps } from '../../@interfaces'
+import {
+  Command, 
+  MessageProps, 
+} from '../../@interfaces'
+
 import { MessageEmbed } from 'discord.js'
 import { durationFromSeconds } from '../../utils/duration'
 import { escape } from '../../utils/markdown'
@@ -9,7 +13,7 @@ const nowplaying: Command = {
   usage: 'nowplaying | np | playing | status',
   description: 'Displays current track.',
 
-  async callback ( props: MessageProps ) {
+  async callback (props: MessageProps) {
     const { currentlyPlaying, dispatcher } = props.queue
 
     if (!currentlyPlaying) props.quickEmbed(null, 'Nothing playing.')
@@ -21,11 +25,11 @@ const nowplaying: Command = {
         fields: [
           {
             name: 'Duration',
-            value: `${durationFromSeconds(dispatcher.streamTime/1000)} / ${currentlyPlaying.duration}`,
+            value: `${durationFromSeconds(dispatcher.streamTime / 1000)} / ${currentlyPlaying.duration}`,
           },
           {
             name: 'Requested by',
-            value: `<@${currentlyPlaying.author.id}>`
+            value: `<@${currentlyPlaying.author.id}>`,
           },
         ],
         thumbnail: {
@@ -33,7 +37,7 @@ const nowplaying: Command = {
         },
       } as MessageEmbed)
     }
-  }
+  },
 }
 
 export default nowplaying

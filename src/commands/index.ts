@@ -1,6 +1,9 @@
 import config from '../config'
 
-import { MessageProps, Command } from '../@interfaces'
+import {
+  MessageProps, 
+  Command, 
+} from '../@interfaces'
 
 import utils from './utils'
 import music from './music'
@@ -10,7 +13,7 @@ export const commands: Command[] = [
   ...music,
 ]
 
-export const testCommand = async ( props: MessageProps ) => {
+export const testCommand = async (props: MessageProps): Promise<void> => {
   const hasPrefix = config.prefix.test(props.content)
 
   for (const { 

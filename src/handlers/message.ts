@@ -1,9 +1,17 @@
-import { MessageEmbed, Message } from 'discord.js'
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/camelcase */
+
+import {
+  MessageEmbed, Message, 
+} from 'discord.js'
 
 import { testCommand } from '../commands'
 import { accent } from '../utils/colors'
 
-import { Props, MessageProps, Track, Search } from '../@interfaces'
+import {
+  Props, 
+  MessageProps,
+} from '../@interfaces'
 
 import music from './music'
 
@@ -23,7 +31,7 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
     return message.channel.send(content)
   }
 
-  const embed = ( options: MessageEmbed ): Promise<Message> => {
+  const embed = (options: MessageEmbed): Promise<Message> => {
     const embed = {
       author: { 
         icon_url: message.author.avatarURL(), 
@@ -31,17 +39,18 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
       },
       // timestamp: new Date(),
       color: accent,
-      ...options
+      ...options,
     } as MessageEmbed
 
     return send({ embed })
   }
 
-  const quickEmbed = ( title?: string, description?: string, color?: string ): Promise<Message> => {
+  const quickEmbed = (title?: string, description?: string, color?: string): Promise<Message> => {
     return embed({
       title,
       description,
-    } as MessageEmbed)
+      color,
+    } as { color: number | string } as MessageEmbed)
   }
 
   const { queues, searches, refreshListeners } = props

@@ -1,16 +1,29 @@
-import { MessageEmbed, Message, StreamDispatcher, VoiceConnection } from "discord.js"
-import { Track, Music, MessageProps, Queue } from "../@interfaces"
+import {
+  MessageEmbed, 
+  Message, 
+  StreamDispatcher, 
+  VoiceConnection, 
+} from "discord.js"
+
+import {
+  Track, 
+  Music, 
+  MessageProps,
+} from "../@interfaces"
 
 import { red } from '../utils/colors'
 
 import ytdlCore from 'ytdl-core-discord'
 
-export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
+export default ({
+  queue, quickEmbed, embed, member, 
+}: MessageProps): Music => {
   const connect = async (): Promise<VoiceConnection> => {
     const { channel } = member.voice
 
     if (!channel) {
       await quickEmbed(null, 'You must join a voice channel first.', red)
+      
       return
     }
 
@@ -42,7 +55,7 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
         currentlyPlaying: null,
       })
     } else {
-      const [ track ] = queue.tracks.splice(0, 1)
+      const [track] = queue.tracks.splice(0, 1)
 
       if (queue.dispatcher) queue.dispatcher.end()
 
@@ -58,7 +71,11 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
       const type = isYoutube ? 'opus' : null
       const highWaterMark = 4096
 
-      const dispatcher: StreamDispatcher = queue.connection.play(source, { bitrate, type, highWaterMark })
+      const dispatcher: StreamDispatcher = queue.connection.play(source, {
+        bitrate,
+        type,
+        highWaterMark, 
+      })
 
       Object.assign(queue, {
         dispatcher,
@@ -83,10 +100,10 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
           {
             name: 'Duration',
             value: `00:00 / ${track.duration}`,
-          }
+          },
         ],
         thumbnail: {
-          url: track.thumbnail
+          url: track.thumbnail,
         },
       } as MessageEmbed)
     } else {
@@ -101,11 +118,11 @@ export default ({ queue, quickEmbed, embed, member }: MessageProps): Music => {
           {
             name: 'Duration',
             value: `${track.duration}`,
-          }
+          },
         ],
         
         thumbnail: {
-          url: track.thumbnail
+          url: track.thumbnail,
         },
       } as MessageEmbed)
     }

@@ -1,4 +1,8 @@
-import { Command, MessageProps, Track } from '../../@interfaces'
+import {
+  Command, 
+  MessageProps, 
+  Track, 
+} from '../../@interfaces'
 
 import ytdl from '../../utils/ytdl'
 
@@ -10,8 +14,8 @@ const play: Command = {
   usage: 'play | p <url>',
   description: 'Adds a track to queue from a URL. ([Supported sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html))',
 
-  async callback ( props: MessageProps ): Promise<void> {
-    const [ url, urlType ] = props.args
+  async callback (props: MessageProps): Promise<void> {
+    const [url, urlType] = props.args
 
     // if (!url || !/^https?:\/\/.+/.test(url) && urlType !== 'file') {
     //   await props.quickEmbed(null, 'Please provide a valid URL.', red)
@@ -82,7 +86,7 @@ const play: Command = {
     }
 
     await props.music.addTrack(track)
-  }
+  },
 }
 
 export default play
