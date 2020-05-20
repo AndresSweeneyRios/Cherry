@@ -44,7 +44,7 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
     } as MessageEmbed)
   }
 
-  const { queues, searches } = props
+  const { queues, searches, refreshListeners } = props
 
   queues[guild.id] = queues[guild.id] || {
     connection: null,
@@ -72,6 +72,7 @@ const messageHandler = (props: Props) => (message: Message): Promise<void> => {
     args: [],
     queue,
     search,
+    refreshListeners,
   } as MessageProps)
 
   const messageProps: MessageProps = Object.assign(

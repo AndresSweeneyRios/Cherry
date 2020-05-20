@@ -16,6 +16,8 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev src",
-    "start": "tsc && cross-env NODE_ENV=production node dist"
+    "start": "cross-env NODE_ENV=production node dist",
+    "devProduction": "cross-env NODE_ENV=development node dist",
+    "build": "tsc"
   }
 }

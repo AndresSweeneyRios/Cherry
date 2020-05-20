@@ -12,4 +12,5 @@ export interface MessageProps extends Message {
   queue: Queue
   search: Search
   music: Music
+  refreshListeners (): Promise<void>
 }
