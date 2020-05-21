@@ -68,7 +68,7 @@ export default ({
 
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
-      const highWaterMark = 1028 * 128
+      const highWaterMark = 1028 * 32
 
       const ytdl = isYoutube ? await ytdlCore(track.url, {
         highWaterMark,
