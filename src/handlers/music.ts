@@ -79,6 +79,8 @@ export default ({
 
       if (ytdl) {
         ytdl.on('error', console.error)
+        ytdl.on('retry', console.error)
+        ytdl.on('reconnect', console.error)
       }
 
       const source =  ytdl || track.url
