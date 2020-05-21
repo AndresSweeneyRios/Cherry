@@ -91,11 +91,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.21.tgz#c00e9603399126925806bed2d9a1e37da506965e"
   integrity sha512-PQKsydPxYxF1DsAFWmunaxd3sOi3iMt6Zmx/tgaagHYmwJ/9cRH91hQkeJZaUGWbvn0K5HlSVEXkn5U/llWPpQ==
 
-"@types/node@^13.11.1":
-  version "13.13.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.6.tgz#caa6756b64d30547a2082235531fa0dd8cba1b6e"
-  integrity sha512-zqRj8ugfROCjXCNbmPBe2mmQ0fJWP9lQaN519hwunOgpHgVykme4G6FW95++dyNFDvJUk4rtExkVkL0eciu5NA==
-
 "@types/node@^14.0.1":
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.1.tgz#5d93e0a099cd0acd5ef3d5bde3c086e1f49ff68c"
@@ -1074,10 +1069,10 @@ loud-rejection@^1.0.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
-m3u8stream@^0.6.3:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.6.5.tgz#a41713cb7144f8fe1eb944d32a8848be8cb2c951"
-  integrity sha512-QZCzhcfUliZfsOboi68QkNcMejPKTEhxE+s1TApvHubDeR8ythm4ViWuYFqgUwZeoHe8q0nsPxOvA3lQvdSzyg==
+m3u8stream@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.7.1.tgz#74b01a67ca248ac7bbdc263a65d9d8d2c479a65c"
+  integrity sha512-z6ldnAdhbuWOL6LmMkwptSZGzj+qbRytMKLTbNicwF/bJMjf9U9lqD57RNQUFecvWadEkzy6PDjcNJFFgi19uQ==
   dependencies:
     miniget "^1.6.1"
     sax "^1.2.4"
@@ -1394,7 +1389,7 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prism-media@^1.2.0, prism-media@^1.2.1:
+prism-media@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-1.2.2.tgz#4f1c841f248b67d325a24b4e6b1a491b8f50a24f"
   integrity sha512-I+nkWY212lJ500jLe4tN9tWO7nRiBAVdMv76P9kffZjYhw20raMlW1HSSvS+MLXC9MmbNZCazMrAr+5jEEgTuw==
@@ -1965,21 +1960,12 @@ yn@3.1.1:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-ytdl-core-discord@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ytdl-core-discord/-/ytdl-core-discord-1.2.0.tgz#b2cc680c5a08ff585e1ed294e86a6a800bac048d"
-  integrity sha512-BTE0eslSZzovThOAXbT9KZjsh2spu9y0nl9ZNrGNn4rLip8xocmYpDUEN8X03tTcGUybpzyN8J7wwM2/gNLRiA==
-  dependencies:
-    "@types/node" "^13.11.1"
-    prism-media "^1.2.1"
-    ytdl-core "^2.0.1"
-
-ytdl-core@^2.0.1:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-2.1.2.tgz#64003e5ac1907df3e92cf36771224811bd81698f"
-  integrity sha512-/tOT9Pka6nX+LuvzNLBU8AbVHe8XELn3aZ69mvCxzvwO/ty9k8cRvF6jXqti7l5M+0hf+UPpP9jYPSAFAuoBUA==
+ytdl-core@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-2.1.3.tgz#1dd06056b97bf4159469ce05ca143d3175354061"
+  integrity sha512-fYgamrENhlRlxBaQioibekS8wzejZZpXlxOGK4pOfhupprGoknY7VAfMJ7zxI36NU8zpnnW9i3VmTRuQIyNB8A==
   dependencies:
     html-entities "^1.3.1"
-    m3u8stream "^0.6.3"
+    m3u8stream "^0.7.1"
     miniget "^1.7.0"
     sax "^1.1.3"

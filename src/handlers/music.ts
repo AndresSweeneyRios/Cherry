@@ -13,7 +13,7 @@ import {
 
 import { red } from '../utils/colors'
 
-import ytdlCore from 'ytdl-core-discord'
+import ytdlCore from 'ytdl-core'
 
 export default ({
   queue, quickEmbed, embed, member, 
@@ -68,13 +68,20 @@ export default ({
 
       const bitrate = 128
       const type = isYoutube ? 'opus' : null
-      const highWaterMark = 1028 * 64
-      const source = isYoutube ? await ytdlCore(track.url, {
+      const highWaterMark = 1028 * 128
+
+      const ytdl = isYoutube ? await ytdlCore(track.url, {
         highWaterMark,
         requestOptions: {
-          maxRetries: 5,
+          maxRetries: 50,
         },
-      }) : track.url
+      }) : null
+
+      if (ytdl) {
+        ytdl.on('error', console.error)
+      }
+
+      const source =  ytdl || track.url
 
       const dispatcher: StreamDispatcher = queue.connection.play(source, {
         bitrate,
