@@ -97,7 +97,7 @@ export default ({
       })
 
       dispatcher.on('error', console.error)
-      dispatcher.on("finish", playNext)
+      dispatcher.on("finish", () => playNext().catch(console.error))
     }
   }
 
