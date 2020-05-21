@@ -13,7 +13,7 @@ import {
 
 import { red } from '../utils/colors'
 
-import ytdlCore from 'ytdl-core'
+import ytdlCore from 'ytdl-core-discord'
 
 export default ({
   queue, quickEmbed, embed, member, 
